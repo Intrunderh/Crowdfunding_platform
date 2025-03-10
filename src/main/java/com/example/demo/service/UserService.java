@@ -59,8 +59,8 @@
 //        return String.valueOf(numRows);
 //    }
 //
-//    public List<User> findByGender() {
-//        List<User> users = userRepository.findByGender(true);
+//    public List<User> findBySex() {
+//        List<User> users = userRepository.findBySex(true);
 //        return users;
 //    }
 //

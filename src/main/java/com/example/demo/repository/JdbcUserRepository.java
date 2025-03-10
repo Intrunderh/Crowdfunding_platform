@@ -49,7 +49,7 @@
 //    }
 //
 //    @Override
-//    public List<User> findByGender(boolean sex) {
+//    public List<User> findBySex(boolean sex) {
 //        return jdbcTemplate.query("SELECT * from users WHERE sex=?",
 //                BeanPropertyRowMapper.newInstance(User.class), sex);
 //    }

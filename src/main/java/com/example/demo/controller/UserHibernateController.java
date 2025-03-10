@@ -1,17 +1,15 @@
 package com.example.demo.controller;
 
 //import com.example.demo.service.UserHibernateService;
+import com.example.demo.dto.CreateUserDto;
+import com.example.demo.dto.UpdateUserDto;
 import com.example.demo.model.UserHibernate;
+import com.example.demo.readmodel.UserReadModel;
 import com.example.demo.service.UserHibernateService;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
@@ -27,23 +25,23 @@ public class UserHibernateController {
     }
 
     @GetMapping("/users")
-    public List<UserHibernate> getAllUsers() {
+    public List<UserReadModel> getAllUsers() {
         return userHibernateService.getAllUsers();
     }
 
     @GetMapping("/users/{id}")
-    public UserHibernate getUserById(long id) {
+    public UserReadModel getUserById(long id) {
         return userHibernateService.getUserById(id);
     }
 
     @PostMapping("/users")
-    public UserHibernate createUser(@RequestBody UserHibernate userHibernate) {
-        return userHibernateService.createUser(userHibernate);
+    public int createUser(@RequestBody CreateUserDto createUserDto) throws Exception {
+        return userHibernateService.createUser(createUserDto);
     }
 
     @PutMapping("/users/{id}")
-    public UserHibernate updateUser(long id, @RequestBody UserHibernate userHibernate) {
-        return userHibernateService.updateUser(userHibernate);
+    public void updateUser(long id, @RequestBody UpdateUserDto updateUserDto) {
+        userHibernateService.updateUser(id, updateUserDto);
     }
 
     @DeleteMapping("/users/{id}")
@@ -56,8 +54,14 @@ public class UserHibernateController {
         userHibernateService.deleteAllUsers();
     }
 
-//    @GetMapping("/users/sex")
-//    public List<UserHibernate> findByGender() {
-//        return userHibernateService.findByGender();
-//    }
+    @GetMapping("/users/sex")
+    public List<UserReadModel> findByGender() {
+        return userHibernateService.findByGender();
+    }
+
+    @GetMapping("/users/email")
+    public List<UserReadModel> findByEmailAddress(String email) {
+        return userHibernateService.findByEmailAddress(email);
+    }
+
 }

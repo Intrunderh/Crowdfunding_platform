@@ -9,5 +9,8 @@ import java.util.List;
 @Repository
 public interface UserHibernateRepository extends JpaRepository<UserHibernate, Long> {
 
+    List<UserHibernate> findByEmail(String email);
+
+    List<UserHibernate> findBySex(boolean sex);
 
 }

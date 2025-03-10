@@ -90,12 +90,12 @@
 //    }
 //
 //    @GetMapping("/users/sex")
-//    public ResponseEntity<List<User>> findByGender() {
+//    public ResponseEntity<List<User>> findBySex() {
 //        try {
-//            if (userService.findByGender().isEmpty()) {
+//            if (userService.findBySex().isEmpty()) {
 //                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //            }
-//            return new ResponseEntity<>(userService.findByGender(), HttpStatus.OK);
+//            return new ResponseEntity<>(userService.findBySex(), HttpStatus.OK);
 //        } catch (Exception e) {
 //            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 //        }

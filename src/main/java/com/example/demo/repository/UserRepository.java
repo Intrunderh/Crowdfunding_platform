@@ -16,7 +16,7 @@
 //
 //    List<User> findAll();
 //
-//    List<User> findByGender(boolean sex);
+//    List<User> findBySex(boolean sex);
 //
 //    List<User> findByNameContaining(String name);
 //

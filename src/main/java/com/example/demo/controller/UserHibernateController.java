@@ -1,12 +1,14 @@
 package com.example.demo.controller;
 
-//import com.example.demo.service.UserHibernateService;
 import com.example.demo.dto.CreateUserDto;
 import com.example.demo.dto.UpdateUserDto;
-import com.example.demo.model.UserHibernate;
 import com.example.demo.readmodel.UserReadModel;
 import com.example.demo.service.UserHibernateService;
+
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +16,6 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
-
 public class UserHibernateController {
 
     @Autowired
@@ -35,8 +36,14 @@ public class UserHibernateController {
     }
 
     @PostMapping("/users")
-    public int createUser(@RequestBody CreateUserDto createUserDto) throws Exception {
-        return userHibernateService.createUser(createUserDto);
+    public ResponseEntity<String> createUser(@Valid @RequestBody CreateUserDto createUserDto) throws Exception {
+        try {
+            int id  = userHibernateService.createUser(createUserDto);
+            return new ResponseEntity<>(String.valueOf(id), HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @PutMapping("/users/{id}")

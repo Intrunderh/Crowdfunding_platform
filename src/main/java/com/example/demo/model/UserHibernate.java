@@ -1,17 +1,19 @@
 package com.example.demo.model;
 
-import com.example.demo.dto.CreateUserDto;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
+@Validated
 public class UserHibernate {
 
     @Id
@@ -22,20 +24,20 @@ public class UserHibernate {
 
     @Column(name = "name")
     @NotNull(message = "Имя пользователя должно быть заполнено")
-    @Min(value = 3, message = "Имя пользователя не может быть меньше 3 символов")
+    @Size(min = 3, message = "Имя пользователя не может быть меньше 3 символов")
     private String name;
 
 
     @Column(name = "age", columnDefinition = "integer")
-    @Min(value = 14, message = "Возраста пользователя не может быть меньше 14")
-    private int age = 0;
+    @Min(value = 14, message = "Возраст пользователя не может быть меньше 14")
+    private int age;
 
 
     @Column(name = "sex")
     private boolean sex;
 
     @Column(name = "email", updatable = false)
-    @Email(message = "Email address has invalid format: ${validatedValue}",
+    @Email(message = "Адрес электронной почты имеет неверный формат: ${validatedValue}",
             regexp = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")
     private String email;
     // нашел в интернете как можно сделать валидацию по почте

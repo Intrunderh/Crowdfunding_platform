@@ -12,14 +12,14 @@ public class CreateUserDto {
     public String email;
 //    public LocalDate currentTimeCreate пока не знаю точно добавлять или нет
 
-    public CreateUserDto(String name, int age, boolean sex, String email) throws Exception {
+    public CreateUserDto(String name, int age, boolean sex, String email)  {
         this.name = name;
         this.age = age;
         this.sex = sex;
         this.email = email;
     }
 
-    public CreateUserDto createUserDto(UserHibernate userHibernate) throws Exception {
+    public CreateUserDto createUserDto(UserHibernate userHibernate) {
         return new CreateUserDto(
                 userHibernate.getName(),
                 userHibernate.getAge(),
